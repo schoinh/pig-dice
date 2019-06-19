@@ -21,6 +21,7 @@ This web site is used to play the game Pig Dice. The user can play against the c
 | **Returns a random number between 1 and 6** | Roll | "3" |
 | **Keeps a tally of current player's rolls** | "3, 5, 3" | "11" |
 | **Clears tally of rolls when 1 is rolled** | "3, 5, 3, 1" | "0" |
+| **Adds current tally to total score when "pass" is clicked** | "3, 5, 3, Pass" | "Total: 11" |
 | **Rolling a one results in the turn passing to the next player** | "3, 5, 3, 1, 4" | "Player 1: 0, Player 2: 4" |
 | **Adds current tally to the total score upon passing turn** | "3, 5, 3, Pass" | "11" |
 | **Switches to other user upon passing turn** | "3, 5, 3, Pass, 4" | "Player 1: 11, Player 2: 4" |
