@@ -2,35 +2,35 @@ function Player(current, total) {
   this.current = current;
   this.total = total;
 }
-
-var rollDice = function() {
+Player.prototype.rollDice = function() {
   var rollNumber;
-  rollNumber = Math.floor(Math.random() * 6) + 1;
+  rollNumber = Math.floor(Math.random() * 6) + 1;   // Returns a random number between 1 and 6
   alert("You rolled a" + rollNumber);
   if (rollNumber !== 1) {
-    player1.current += rollNumber;
+    this.current += rollNumber;    // Keeps a tally of current player's rolls
   } else {
-    player1.current = 0;
-    // insert something to switch to other player
+    this.current = 0;    // Clears tally of rolls when 1 is rolled
+    passDice();   // Rolling a one results in the turn passing to the next player
   }
+  alert("Your current tally is" + this.current);
 }
 
-var passDice = function () {
-  player1.total += player1.current;
-  player1.current = 0;
+Player.prototype.passDice = function () {
+  this.total += this.current;   // Adds current tally to total score when "pass" is clicked
+  this.current = 0;
 }
+
 
 var player1 = new Player(0, 0);
 var player2 = new Player(0, 0);
 
 $(function() {
   $("#roll").click(function() {
-    rollDice();
-    alert("Your current tally is" + player1.current);
+    player1.rollDice();
   });
 
-  $("#pass").click(function() {
-    passDice();
+  $("#pass").click(function() {   // Switches to other user upon passing turn
+    player2.passDice();
     alert("Your total score is" + player1.total);
   })
 })
