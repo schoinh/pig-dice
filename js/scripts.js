@@ -1,5 +1,6 @@
 // Business Logic
 var rollNumber;
+var winner = false;
 
 function Player(name, current, total) {
   this.name = name;
@@ -18,9 +19,10 @@ Player.prototype.rollDice = function() {
     switchPlayer();
     highlightPlayer();
   }
-  // alert("Your current tally is" + this.current);
-  if (this.current + this.total >= 50) {    // Terminates game at 20
-    alert(this.name + " is the winner!")
+  if (this.current + this.total >= 100) {    // Terminates game at 100
+    this.tallyUp();
+    totalOutput();
+    winner = true;
   }
 }
 
@@ -69,6 +71,9 @@ highlightPlayer();
     currentPlayer.rollDice();
     $(".roll-result").text("You rolled a " + rollNumber);
     $("#turn-tally").text(currentPlayer.current);   //shows current player's temp tally
+    if (winner) {
+      $("#winner").text(currentPlayer.name + " is the winner!");
+    }
   });
 
   $("#pass").click(function() {   // Switches to other user upon passing turn
@@ -77,6 +82,6 @@ highlightPlayer();
     switchPlayer();
     $("#turn-tally").text(currentPlayer.current);   // resets and displays current player's temp tally
     highlightPlayer();
-    $(".roll-result").text("");   // displays nothing when current player has yet to roll
+    $(".roll-result").empty();   // displays nothing when current player has yet to roll
   })
 })

@@ -5,13 +5,16 @@
     <link href="css/styles.css" rel="stylesheet" type="text/css">
     <script src="js/jquery-3.4.1.js"></script>
     <script src="js/scripts.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Major+Mono+Display|Space+Mono&display=swap" rel="stylesheet">
     <title>Pig Dice</title>
   </head>
   <body>
     <div class="container">
-      <h1>Pig Dice Game</h1>
+      <div class="jumbotron">
+        <h1>Pig Dice Game</h1>
+        <h5>The objective of Pig Dice Game is to score 100 points before the opponent(s) do(es). The Pig game is played with a single six-sided die.</h5>
+      </div>
       <div class="output">
-        <h5>Turn Tally:<span id="turn-tally"></span></h5>
         <div class="player1">
           <h5>Player 1</h5>
           <p>Total:<span id="player1-total"></span></p>
@@ -20,11 +23,12 @@
           <h5>Player 2</h5>
           <p>Total:<span id="player2-total"></span></p>
         </div>
-      </div>
       <button id="roll" class="btn btn-primary">Roll</button>
       <button id="pass" class="btn btn-danger">Pass</button>
-      <div class="roll-result">
-
+      <hr>
+      <h5 class="roll-result"></h5>
+      <h5>Tally:<span id="turn-tally"></span></h5>
+      <h1 id="winner"></h1>
       </div>
     </div>
   </body>
