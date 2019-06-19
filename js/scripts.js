@@ -1,22 +1,25 @@
 // Business Logic
+var rollNumber;
+
 function Player(name, current, total) {
   this.name = name;
   this.current = current;
   this.total = total;
 }
+
 Player.prototype.rollDice = function() {
-  var rollNumber;
   rollNumber = Math.floor(Math.random() * 6) + 1;   // Returns a random number between 1 and 6
-  alert("You rolled a" + rollNumber);
   if (rollNumber !== 1) {
     this.current += rollNumber;    // Keeps a tally of current player's rolls
   } else {
     this.current = 0;    // Clears tally of rolls when 1 is rolled
     this.tallyUp();   // Rolling a one results in the turn passing to the next player
+    totalOutput();
     switchPlayer();
+    highlightPlayer();
   }
-  alert("Your current tally is" + this.current);
-  if (this.current + this.total >= 20) {    // Terminates game at 20
+  // alert("Your current tally is" + this.current);
+  if (this.current + this.total >= 50) {    // Terminates game at 20
     alert(this.name + " is the winner!")
   }
 }
@@ -33,20 +36,47 @@ var switchPlayer = function(){    // Switches to other user upon passing turn
   }
 }
 
+// User Interface Logic ---------------------
+
+var highlightPlayer = function() {    // Highlights the current player
+  if (currentPlayer === player1) {
+    $(".player2").removeClass("highlight");
+    $(".player1").addClass("highlight");
+  } else {
+    $(".player1").removeClass("highlight");
+    $(".player2").addClass("highlight");
+  }
+}
+
+var totalOutput = function() {      // Display the cumulative total for each player
+  if (currentPlayer === player1) {
+    $("#player1-total").text(currentPlayer.total);
+  } else {
+    $("#player2-total").text(currentPlayer.total);
+  }
+}
+
 var player1 = new Player("Player 1", 0, 0);
 var player2 = new Player("Player 2", 0, 0);
 
 var currentPlayer = player1;
-// User Interface Logic
+
 $(function() {
+
+highlightPlayer();
+
   $("#roll").click(function() {
     currentPlayer.rollDice();
+    $(".roll-result").text("You rolled a " + rollNumber);
+    $("#turn-tally").text(currentPlayer.current);   //shows current player's temp tally
   });
 
   $("#pass").click(function() {   // Switches to other user upon passing turn
-    // debugger;
     currentPlayer.tallyUp();
-    alert("Your total score is" + currentPlayer.total);
+    totalOutput();
     switchPlayer();
+    $("#turn-tally").text(currentPlayer.current);   // resets and displays current player's temp tally
+    highlightPlayer();
+    $(".roll-result").text("");   // displays nothing when current player has yet to roll
   })
 })
