@@ -14,7 +14,6 @@ Player.prototype.rollDice = function() {
     this.current += rollNumber;    // Keeps a tally of current player's rolls
   } else {
     this.current = 0;    // Clears tally of rolls when 1 is rolled
-    this.tallyUp();   // Rolling a one results in the turn passing to the next player
     totalOutput();
     switchPlayer();
     highlightPlayer();
